@@ -6,7 +6,7 @@ over facial identity, expressions, and head pose. This repository contains the
 core NumPy and Jax based GNM model implementation, and tools for visualization
 and semantic sampling of parameters.
 
-![GNM Teaser Image](gnm/assets/readme/teaser.gif)]
+![GNM Teaser Image](gnm/assets/readme/teaser.gif)
 
 ## Features
 
