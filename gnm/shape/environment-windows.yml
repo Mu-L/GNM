@@ -1,6 +1,7 @@
 name: gnm
 channels:
   - conda-forge
+  - defaults
 dependencies:
   - python=3.13
   - pip
@@ -23,8 +24,8 @@ dependencies:
   - rtree
   - pylint
   - pytorch
-  - tensorflow
   - pip:
+      - tensorflow
       # Not available on conda-forge.
       - tensorflow-graphics
       - opencv-python-headless

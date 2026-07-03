@@ -26,5 +26,6 @@ dependencies:
   - pip:
       - torch
       - tensorflow
+      # Not available on conda-forge.
       - tensorflow-graphics
       - opencv-python-headless
