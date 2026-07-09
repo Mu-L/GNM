@@ -1,4 +1,4 @@
-name: CI (macOS)
+name: CI
 
 on:
   push:
@@ -21,7 +21,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test:
+  macos:
+    name: macOS
     uses: ./.github/workflows/reusable-test.yml
     with:
       os: macos-latest

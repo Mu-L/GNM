@@ -1,4 +1,4 @@
-name: CI (Linux)
+name: CI
 
 on:
   push:
@@ -21,7 +21,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test:
+  linux:
+    name: Linux
     uses: ./.github/workflows/reusable-test.yml
     with:
       os: ubuntu-latest

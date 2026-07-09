@@ -1,4 +1,4 @@
-name: CI (Windows)
+name: CI
 
 on:
   push:
@@ -21,7 +21,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test:
+  windows:
+    name: Windows
     uses: ./.github/workflows/reusable-test.yml
     with:
       os: windows-latest
