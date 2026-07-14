@@ -41,7 +41,9 @@ class RegularizedLeastSquaresTest(parameterized.TestCase):
     array = np.diag(np.arange(1, dim + 1))
     target = self.rng.normal(size=(dim,))
 
-    actual_solution = _regularized_least_squares(array, target, weight)[0]  # pyrefly: ignore[bad-argument-type]
+    actual_solution = _regularized_least_squares(
+        array, target, weight  # pyrefly: ignore[bad-argument-type]
+    )[0]
 
     # Compute the expected solution using the analytical solution:
     # (A^T @ A + weight * I)^(-1) @ A^T @ b
@@ -58,7 +60,9 @@ class RegularizedLeastSquaresTest(parameterized.TestCase):
     array = np.diag(np.arange(1, dim + 1))
     target = self.rng.normal(size=(dim,))
 
-    solver = regularized_least_squares.RegularizedLeastSquares(array, weight)  # pyrefly: ignore[bad-argument-type]
+    solver = regularized_least_squares.RegularizedLeastSquares(
+        array, weight  # pyrefly: ignore[bad-argument-type]
+    )
     actual_solution = solver.solve(target)
 
     # Compute the expected solution using the analytical solution:

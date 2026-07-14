@@ -54,9 +54,12 @@ def _write_images(
     images: np.ndarray,
 ) -> None:
   """Writes a row of images to the undeclared outputs directory."""
-  png_path = outputs_dir / f'{name}.png'  # pyrefly: ignore[unsupported-operation]
+  png_path = (
+      outputs_dir / f'{name}.png'  # pyrefly: ignore[unsupported-operation]
+  )
   height, width = images.shape[-3:-1]
-  stack = np.hstack(images.reshape(-1, height, width, 3))  # pyrefly: ignore[no-matching-overload]
+  reshaped = images.reshape(-1, height, width, 3)
+  stack = np.hstack(reshaped)  # pyrefly: ignore[no-matching-overload]
   media.write_image(png_path, stack)
 
 
@@ -143,10 +146,11 @@ class RenderGNMTest(parameterized.TestCase):
         spin_period=spin_period,
     )
 
-    renders = render_gnm.render_gnm(
-        gnm_np,
-        **(self.rendering_kwargs | {'world_to_camera': world_to_camera}),  # pyrefly: ignore[bad-argument-type]
+    cam_dict = {'world_to_camera': world_to_camera}
+    kwargs = (
+        self.rendering_kwargs | cam_dict  # pyrefly: ignore[bad-argument-type]
     )
+    renders = render_gnm.render_gnm(gnm_np, **kwargs)
     self.assertLen(renders, spin_period)
     _write_gif(
         self.outputs_dir,
@@ -815,7 +819,10 @@ class TestProjectPointsForGNM(parameterized.TestCase):
         x = joints_image[..., 0].astype(np.int32)
         y = joints_image[..., 1].astype(np.int32)
         for i in range(spin_period):
-          self.assertTrue(mask[i, y[i], x[i]].all())  # pyrefly: ignore[bad-index]
+          is_in_mask = (
+              mask[i, y[i], x[i]].all()  # pyrefly: ignore[bad-index]
+          )
+          self.assertTrue(is_in_mask)
 
     # Draw points on the image and save.
     image = (image * 255).astype(np.uint8)

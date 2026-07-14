@@ -128,10 +128,10 @@ class ProjectOnPcaTest(parameterized.TestCase):
     # Check that the mesh error is within the threshold. We do not compare the
     # coefficients because the least-squares fit for the mesh with fewer
     # components is not expected to be the same as using all components.
-    mesh_error = (
-        np.linalg.norm(result.reconstruction - vertices, axis=-1).mean()  # pyrefly: ignore[unsupported-operation]
-        * _M_TO_MM
-    )
+    mean_error = np.linalg.norm(
+        result.reconstruction - vertices, axis=-1
+    ).mean()  # pyrefly: ignore[unsupported-operation]
+    mesh_error = mean_error * _M_TO_MM
     self.assertLess(mesh_error, threshold)
 
   @parameterized.product(

@@ -58,7 +58,9 @@ def get_vertex_colors(
 
   for region, (scale, offset) in _VERTEX_GROUP_COLOR_MODIFIERS.items():
     if region in gnm_np.vertex_group_names:
-      colors[gnm_np.vertex_group_indices(region)] = color * scale + offset  # pyrefly: ignore[unsupported-operation]
+      colors[gnm_np.vertex_group_indices(region)] = (
+          color * scale + offset  # pyrefly: ignore[unsupported-operation]
+      )
   return colors
 
 

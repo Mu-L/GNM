@@ -115,7 +115,9 @@ class ExpressionSampler:
       verbose: If True, prints a summary of the loaded decoder model.
     """
     if decoder_model_path is None:
-      decoder_model_path = _EXPRESSION_DECODER_PATH  # pyrefly: ignore[bad-assignment]
+      decoder_model_path = (
+          _EXPRESSION_DECODER_PATH  # pyrefly: ignore[bad-assignment]
+      )
     self._decoder = tf.keras.models.load_model(str(decoder_model_path))
     self._expression_names = tuple(member.name.lower() for member in Expression)
     self._num_classes = self._decoder.inputs[1].shape[-1]
@@ -349,7 +351,9 @@ class IdentitySampler:
       verbose: If True, prints a summary of the loaded decoder model.
     """
     if decoder_model_path is None:
-      decoder_model_path = _IDENTITY_DECODER_PATH  # pyrefly: ignore[bad-assignment]
+      decoder_model_path = (
+          _IDENTITY_DECODER_PATH  # pyrefly: ignore[bad-assignment]
+      )
     self._decoder = tf.keras.models.load_model(decoder_model_path)
 
     self._condition_dim = self._decoder.inputs[1].shape[-1]
